@@ -210,10 +210,13 @@ export default function MiraAssistant() {
                   msg.data[0]?.image_url ? (
                     <div className="grid grid-cols-1 gap-4">
 
-                      {msg.data.map((img, i) => {
-  if (!img.image_url || !("caption" in img)) return null; // skip if invalid
-  return <ImageWithLoader key={i} img={img as ImageData} />;
-})}
+{msg.data
+  ?.filter((img): img is { image_url: string; caption: string } => 
+    img.image_url !== undefined && 'caption' in img
+  )
+  .map((img, i) => (
+    <ImageWithLoader key={i} img={img} />
+  ))}
                     </div>
                   ) : (
                     <p>{msg.data[0]?.message || msg.text}</p>
