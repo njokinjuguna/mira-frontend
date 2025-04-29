@@ -1,11 +1,20 @@
 import { useState } from 'react'
 import NextImage from 'next/image'
 
+
 interface ImageData {
-  image_url: string
-  caption: string
-  score?: number
+  image_url: string;
+  caption: string;
+  score?: number;
 }
+
+interface Message {
+  type: "user" | "mira";
+  text: string;
+  intent?: string;
+  data?: ImageData[]; // <- stricter typing here
+}
+
 
 export default function ImageWithLoader({ img }: { img: ImageData }) {
   const [loaded, setLoaded] = useState(false)
