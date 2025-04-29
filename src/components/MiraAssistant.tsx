@@ -15,7 +15,10 @@ export default function MiraAssistant() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [supportsSpeech, setSupportsSpeech] = useState<boolean>(false);
+  
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const [micError, setMicError] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<string>("");
@@ -30,8 +33,9 @@ export default function MiraAssistant() {
     if (typeof window !== "undefined") {
       setSupportsSpeech("speechSynthesis" in window);
 
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition =  window.SpeechRecognition || window.webkitSpeechRecognition;
+  
+
       if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
         recognition.lang = "en-US";
