@@ -7,10 +7,21 @@ interface ImageData {
   score?: number;
 }
 
+// Helper to extract image ID from Google Drive URL
+function extractImageId(url: string): string {
+  const match = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+  if (match) return match[1];
+  const alt = url.match(/id=([a-zA-Z0-9_-]{10,})/);
+  if (alt) return alt[1];
+  return url;
+}
+
 export default function ImageWithLoader({ img }: { img: ImageData }) {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [rotation, setRotation] = useState<number>(0);
   const [zoomed, setZoomed] = useState<boolean>(false);
+
+  const backendImageUrl = `${process.env.NEXT_PUBLIC_API_URL}/image/${extractImageId(img.image_url)}`;
 
   return (
     <div className="bg-white border rounded-xl p-2 shadow-sm">
