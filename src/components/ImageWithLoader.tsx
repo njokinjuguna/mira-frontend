@@ -48,6 +48,7 @@ export default function ImageWithLoader({ img }: { img: ImageData }) {
             className="rounded"
             onLoad={() => setLoaded(true)} // Set loader to false when image loads
             style={{ objectFit: 'contain' }}
+            unoptimized 
           />
         </div>
       </div>
