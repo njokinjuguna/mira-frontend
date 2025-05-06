@@ -41,7 +41,7 @@ export default function ImageWithLoader({ img }: { img: ImageData }) {
           onClick={() => setZoomed(!zoomed)} // Toggle zoom on click
         >
           <NextImage
-            src={img.image_url}
+            src={backendImageUrl}
             alt={img.caption}
             width={400}
             height={300}
