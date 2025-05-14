@@ -24,24 +24,26 @@ export default function ImageWithLoader({ img }: { img: ImageData }) {
 
   return (
     <div className="bg-white border rounded-xl p-2 shadow-sm w-full">
-      <div className="relative w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden rounded-md">
+      <div className="relative w-full h-auto bg-gray-100 flex items-center justify-center overflow-hidden rounded-md">
         {!loaded && <div className="absolute w-full h-full bg-gray-200 animate-pulse" />}
+
         <div
           style={{
             transform: `rotate(${rotation}deg) scale(${zoomed ? 1.5 : 1})`,
             transition: 'transform 0.3s ease',
           }}
-          className="w-full h-full object-contain cursor-zoom-in"
+          className="w-full h-full object-cover cursor-zoom-in"
           onClick={() => setZoomed(!zoomed)}
         >
           <NextImage
             src={backendImageUrl}
             alt={img.caption}
+            layout="responsive"  // 🔹 Auto-resizing image
             width={400}
             height={300}
             onLoad={() => setLoaded(true)}
-            className="rounded w-full h-full object-contain"
-            style={{ objectFit: 'contain' }}
+            className="rounded w-full h-full object-cover"  // 🔹 Ensures full coverage
+            style={{ objectFit: 'cover' }}
             unoptimized
           />
         </div>

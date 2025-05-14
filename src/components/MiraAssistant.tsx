@@ -179,7 +179,7 @@ export default function MiraAssistant() {
     <div className="min-h-screen bg-gray-50 p-6 flex flex-col items-center justify-center">
       <div className="bg-white w-full max-w-sm rounded-2xl shadow-lg p-4 relative">
         <h1 className="text-xl font-bold text-center text-gray-700 mb-2">
-          Mira The Interior Design Expert
+          Mira Your Interior Design Expert
         </h1>
 
         <div
@@ -207,31 +207,30 @@ export default function MiraAssistant() {
                   msg.type === "user" ? "bg-black text-white" : "bg-gray-100 text-gray-800"
                 }`}
               >
-                {msg.intent === "search" && Array.isArray(msg.data) ? (
-                  msg.data[0]?.image_url ? (
-                    <div className="grid grid-cols-1 gap-4">
-
-{msg.data
-  ?.filter((img): img is { image_url: string; caption: string } => 
-    img.image_url !== undefined && 'caption' in img
-  )
-  .map((img, i) => (
-    <ImageWithLoader key={i} img={img} />
-  ))}
+               {msg.intent === "search" && Array.isArray(msg.data) ? (
+    msg.data[0]?.image_url ? (
+        <div className="grid grid-cols-auto gap-4 w-full">
+            {msg.data
+                ?.filter((img): img is { image_url: string; caption: string } => 
+                    img.image_url !== undefined && 'caption' in img
+                )
+                .map((img, i) => (
+                    <div key={i} className="w-full h-auto flex items-center justify-center">
+                        <ImageWithLoader img={img} />
                     </div>
-                  ) : (
-                    <p>{msg.data[0]?.message || msg.text}</p>
-                  )
-                ) : (
-                  <span
-                    onClick={() =>
-                      msg.type === "user" && handleEditClick(msg.text)
-                    }
-                    className="cursor-pointer hover:underline"
-                  >
-                    {msg.text}
-                  </span>
-                )}
+                ))}
+        </div>
+    ) : (
+        <p>{msg.data[0]?.message || msg.text}</p>
+    )
+) : (
+    <span
+        onClick={() => msg.type === "user" && handleEditClick(msg.text)}
+        className="cursor-pointer hover:underline"
+    >
+        {msg.text}
+    </span>
+)}
               </div>
             </div>
           ))}
