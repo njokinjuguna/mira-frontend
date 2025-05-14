@@ -177,7 +177,7 @@ export default function MiraAssistant() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 flex flex-col items-center justify-center">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-6 relative">
+      <div className="bg-white w-full max-w-sm rounded-2xl shadow-lg p-4 relative">
         <h1 className="text-xl font-bold text-center text-gray-700 mb-2">
           Mira The Interior Design Expert
         </h1>
@@ -203,7 +203,7 @@ export default function MiraAssistant() {
                 />
               )}
               <div
-                className={`rounded-xl px-4 py-2 text-sm max-w-md whitespace-pre-wrap ${
+                className={`rounded-xl px-4 py-2 text-sm w-full break-words ${
                   msg.type === "user" ? "bg-black text-white" : "bg-gray-100 text-gray-800"
                 }`}
               >
